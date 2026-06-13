@@ -1,21 +1,40 @@
 import json
 import requests
-from pathlib import Path
 import logging
+import os
+from pathlib import Path
+from dotenv import load_dotenv
 
 logging.basicConfig(
     level=logging.INFO, 
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
+env_path = Path(__file__).resolve().parent[3] / "config" / ".env"
+output_dir = Path(__file__).resolve().parent[3] / "data" / "raw_data"
+
+load_dotenv(env_path)
+API_KEY = os.getenv('API_KEY')
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
+
+city = "Sao Paulo"
+country = "BR"
+units = "metric"
+
+url = (
+    f"{BASE_URL}"
+    f"?q={city},{country}"
+    f"&units={units}"
+    f"&appid={API_KEY}"
+)
 
 def extract_weather_data(url:str, output_dir: Path):
     """
     Extract raw data from OpenWeather API and save it as a JSON file.
      
-    This function performs the following steps:
+    Steps:
     -Sends a GET request to the API
-    -Validates the HTTP response satus
+    -Validates the HTTP response status
     -Parses the response as JSON
     -Saves the raw data into a JSON File
 
@@ -48,4 +67,5 @@ def extract_weather_data(url:str, output_dir: Path):
         json.dump(weather_data, file, indent=4, ensure_ascii=False)
     
     logging.info(f"File successfully saved at: {file_path}")
-    return str(file_path)
+    return file_path
+
