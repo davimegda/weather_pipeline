@@ -1,13 +1,4 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
-
-# Virtual environments
-# Python-generated files
+# Python
 __pycache__/
 *.py[cod]
 build/
@@ -15,8 +6,14 @@ dist/
 wheels/
 *.egg-info/
 
-# Virtual environments
+# Virtual environment
 .venv/
 
 # Environment variables
 config/.env
+
+# Pytest
+.pytest_cache/
+
+# ETL generated files
+data/raw_data/*.json

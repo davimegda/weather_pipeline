@@ -2,7 +2,6 @@ import json
 import requests
 from pathlib import Path
 import logging
-import os
 
 logging.basicConfig(
     level=logging.INFO, 
@@ -10,7 +9,7 @@ logging.basicConfig(
 )
 
 
-def extract_weather_data(url:str):
+def extract_weather_data(url:str, output_dir: Path):
     """
     Extract raw data from OpenWeather API and save it as a JSON file.
      
@@ -38,14 +37,13 @@ def extract_weather_data(url:str):
     # Parse response into JSON format
     weather_data = response.json()
 
-    # Define output directory
-    output_dir = Path("data/raw_data")
+    # Ensure output directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Define file path
-    file_path = output_dir / "weather_data"
+    # Define the path where the API response will be saved as a JSON file
+    file_path = output_dir / "weather_data.json"
     
-    # Save JSON data into file
+    # Save raw data into JSON file
     with open(file_path, "w", encoding="utf-8") as file:
         json.dump(weather_data, file, indent=4, ensure_ascii=False)
     
