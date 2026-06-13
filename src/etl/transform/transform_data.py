@@ -152,13 +152,15 @@ def normalize_datetime_columns(df: pd.DataFrame, columns_names: list[str]):
     logging.info(f"Columns successfully converted to datetime!")
     return df
 
-def data_transformations():
-    print(f"Initiating transformations... ")
+def data_transformations(file_path: Path):
+    logging.info(f"Initiating transformations... ")
+
     df = create_weather_dataframe(file_path)
     df = normalize_weather_column(df)
     df = drop_columns(df, columns_names_to_drop)
     df = rename_columns(df, columns_names_to_rename)
     df = normalize_datetime_columns(df, columns_to_normalize_datetime)
+    
     logging.info(
         f"Transformation completed successfully. Final DataFrame: "
         f"{len(df)} rows and {len(df)} columns"
@@ -168,4 +170,5 @@ def data_transformations():
     print(f"DataFrame final shape: {df.shape}")
     return df
 
-data_transformations()
+if __name__ == "__main__":
+    data_transformations(file_path)

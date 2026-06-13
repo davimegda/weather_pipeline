@@ -10,8 +10,8 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-env_path = Path(__file__).resolve().parent[3] / "config" / ".env"
-output_dir = Path(__file__).resolve().parent[3] / "data" / "raw_data"
+env_path = Path(__file__).resolve().parents[3] / "config" / ".env"
+output_dir = Path(__file__).resolve().parents[3] / "data" / "raw_data"
 
 load_dotenv(env_path)
 API_KEY = os.getenv('API_KEY')
