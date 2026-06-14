@@ -40,7 +40,7 @@ columns_names_to_rename = {
     }
 columns_to_normalize_datetime = ['datetime', 'sunrise', 'sunset']
 
-def create_weather_dataframe(file_path: Path):
+def create_weather_dataframe(file_path: str):
     """
     Load a weather JSON file and transform to a Pandas DataFrame.
 
@@ -58,7 +58,7 @@ def create_weather_dataframe(file_path: Path):
 
     logging.info("Creating DataFrame with JSON file...")
 
-    path = file_path
+    path = Path(file_path)
 
     if not path.exists():
         logging.error(f"File not found: {path}")
@@ -150,8 +150,8 @@ def normalize_datetime_columns(df: pd.DataFrame, columns_names: list[str]):
     logging.info(f"Columns successfully converted to datetime!")
     return df
 
-def transform_weather_data(output_dir: Path):
-    file_path = output_dir
+def transform_weather_data(output_dir: str):
+    file_path = Path(output_dir)
     logging.info(f"Initiating transformations... ")
 
     df = create_weather_dataframe(file_path)
@@ -160,6 +160,13 @@ def transform_weather_data(output_dir: Path):
     df = rename_columns(df, columns_names_to_rename)
     df = normalize_datetime_columns(df, columns_to_normalize_datetime)
     
+    # Define directory to save transformed df
+    output_path = Path(__file__).resolve().parents[3] / "data" / "clean_data"
+    output_path.mkdir(parents=True, exist_ok=True)
+    df_output = output_path / "df_weather.parquet"
+
+    df.to_parquet(df_output, index=False)
+    
     logging.info(
         f"Transformation completed successfully. Final DataFrame: "
         f"{len(df)} rows and {len(df)} columns"
@@ -167,4 +174,4 @@ def transform_weather_data(output_dir: Path):
 
     print(f"DataFrame HEAD: \n{df.head()}")
     print(f"DataFrame final shape: {df.shape}")
-    return df
+    return str(df_output)

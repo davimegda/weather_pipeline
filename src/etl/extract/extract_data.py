@@ -49,4 +49,4 @@ def extract_weather_data(url:str, output_dir: Path):
         json.dump(weather_data, file, indent=4, ensure_ascii=False)
     
     logging.info(f"File successfully saved at: {file_path}")
-    return Path(file_path)
+    return str(file_path)

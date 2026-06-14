@@ -19,10 +19,6 @@ user = os.getenv('POSTGRES_USER')
 password = os.getenv('POSTGRES_PASSWORD')
 database = os.getenv('POSTGRES_DB')
 table_name = "sp_weather"
-
-#PostgreSQL está rodando localmente no WSL.
-# Se o banco estiver no host Windows/Docker Desktop,
-# usar host.docker.internal.
 host = os.getenv("DB_HOST")
 port = os.getenv("DB_PORT")
 
@@ -30,14 +26,17 @@ port = os.getenv("DB_PORT")
 def get_engine():
     logging.info(f"Connecting at {host}:5432/{database}")
     return create_engine(
-        f"postgresql+psycopg2://{user}:{quote_plus(password)}@{host}:{port}}/{database}"
+        f"postgresql+psycopg2://{user}:{quote_plus(password)}@{host}:{port}/{database}"
     )
 
 
-def load_weather_data(table_name:str, df: pd.DataFrame):
+def load_weather_data(parquet_file_path: str):
     engine = get_engine()
 
     try:
+        logging.info(f"Reading parquet file: {parquet_file_path}")
+        df = pd.read_parquet(parquet_file_path)
+        
         logging.info(f"Loading data into table: {table_name}")
         df.to_sql(
             name=table_name,
