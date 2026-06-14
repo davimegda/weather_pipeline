@@ -1,11 +1,10 @@
 import pytest
 import pandas as pd
 from pathlib import Path
-
 from etl.transform.transform_data import (
-    data_transformations,
+    transform_weather_data,
     create_weather_dataframe
-)
+    )
 
 
 @pytest.fixture
@@ -46,7 +45,7 @@ def test_etl_pipeline_and_file_handling(sample_weather_file):
     """
 
     # Act
-    df = data_transformations(sample_weather_file)
+    df = transform_weather_data(sample_weather_file)
 
     # Assert - structure
     assert isinstance(df, pd.DataFrame)

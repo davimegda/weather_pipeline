@@ -26,8 +26,8 @@ def test_extract_success(mock_get, tmp_path):
     assert isinstance(result, Path)
 
     path = Path(result)
-    assert path.suffix == ".json"
     assert path.exists()
+    assert path.suffix == ".json"
 
     with open(path, "r", encoding="utf-8") as file:
         data = json.load(file)
