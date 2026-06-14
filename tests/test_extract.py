@@ -23,7 +23,7 @@ def test_extract_success(mock_get, tmp_path):
     mock_get.return_value = mock_response
 
     result = extract_weather_data(fake_url, tmp_path)
-    assert isinstance(result, Path)
+    assert isinstance(result, str)
 
     path = Path(result)
     assert path.exists()

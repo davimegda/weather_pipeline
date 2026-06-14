@@ -45,10 +45,11 @@ def test_etl_pipeline_and_file_handling(sample_weather_file):
     """
 
     # Act
-    df = transform_weather_data(sample_weather_file)
+    parquet_path = transform_weather_data(sample_weather_file)
+    df = pd.read_parquet(parquet_path)
 
     # Assert - structure
-    assert isinstance(df, pd.DataFrame)
+    assert isinstance(parquet_path, str)
     assert not df.empty
     assert df.shape[0] > 0
 
