@@ -3,29 +3,10 @@ import requests
 import logging
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
 logging.basicConfig(
     level=logging.INFO, 
     format='%(asctime)s - %(levelname)s - %(message)s'
-)
-
-env_path = Path(__file__).resolve().parents[3] / "config" / ".env"
-output_dir = Path(__file__).resolve().parents[3] / "data" / "raw_data"
-
-load_dotenv(env_path)
-API_KEY = os.getenv('API_KEY')
-BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
-
-city = "Sao Paulo"
-country = "BR"
-units = "metric"
-
-url = (
-    f"{BASE_URL}"
-    f"?q={city},{country}"
-    f"&units={units}"
-    f"&appid={API_KEY}"
 )
 
 def extract_weather_data(url:str, output_dir: Path):
@@ -39,6 +20,7 @@ def extract_weather_data(url:str, output_dir: Path):
     -Saves the raw data into a JSON File
 
     :param url (str): API endpoint
+    :param output_dir(Path): Directory where extracted weather data file will be stored
     :return: Parsed JSON response (dict or list)
     """
 
@@ -67,5 +49,4 @@ def extract_weather_data(url:str, output_dir: Path):
         json.dump(weather_data, file, indent=4, ensure_ascii=False)
     
     logging.info(f"File successfully saved at: {file_path}")
-    return file_path
-
+    return Path(file_path)

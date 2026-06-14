@@ -8,8 +8,6 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-file_path = Path(__file__).resolve().parents[3] / 'data' / 'raw_data' / 'weather_data.json'
-
 columns_names_to_drop = ['weather', 'weather_icon', 'sys.type']
 columns_names_to_rename = {
         "base": "base",
@@ -152,7 +150,8 @@ def normalize_datetime_columns(df: pd.DataFrame, columns_names: list[str]):
     logging.info(f"Columns successfully converted to datetime!")
     return df
 
-def data_transformations(file_path: Path):
+def transform_weather_data(output_dir: Path):
+    file_path = output_dir
     logging.info(f"Initiating transformations... ")
 
     df = create_weather_dataframe(file_path)
@@ -169,6 +168,3 @@ def data_transformations(file_path: Path):
     print(f"DataFrame HEAD: \n{df.head()}")
     print(f"DataFrame final shape: {df.shape}")
     return df
-
-if __name__ == "__main__":
-    data_transformations(file_path)
