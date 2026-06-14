@@ -9,8 +9,14 @@ wheels/
 # Virtual environment
 .venv/
 
+# Data Pipeline
+logs
+plugins
+config
+
 # Environment variables
 config/.env
+.env
 
 # Pytest
 .pytest_cache/
