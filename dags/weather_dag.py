@@ -20,7 +20,7 @@ raw_dir = Path(__file__).resolve().parent.parent / 'data' / 'raw_data'
 @dag(
     dag_id='weather_etl',
     start_date=datetime(2026, 6, 14, tz="UTC"),
-    schedule="0 12 * * *",
+    schedule="0 * * * *",
     catchup=False,
     description="ETL pipeline that extract weather data from OpenWeather API and stores raw JSON files",
     default_args={
