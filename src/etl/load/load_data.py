@@ -48,7 +48,7 @@ def load_weather_data(parquet_file_path: str):
         logging.info(f"Data loaded successfully")
 
         df_check = pd.read_sql(
-            text(f"SELECT * FROM {table_name}"), 
+            text(f"SELECT COUNT(*) FROM {table_name}"), 
             con=engine
     
         )
