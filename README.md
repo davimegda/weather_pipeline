@@ -11,7 +11,7 @@ O objetivo é simular um fluxo real de engenharia de dados, aplicando boas prát
 ## ⚙️ Orquestração e infraestrutura
 
 O pipeline ETL é orquestrado pelo **Apache Airflow**, enquanto a infraestrutura do ambiente é gerenciada via **Docker e Docker Compose**.
-![Arquitetura do Projeto](arquitetura_de_dados.png)
+![Arquitetura do Projeto](docs/arquitetura_de_dados.png)
 
 ## ⚙️ Arquitetura do projeto
 O pipeline é dividido em três etapas:
