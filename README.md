@@ -4,22 +4,21 @@
 
 Esse projeto é um pipeline ETL **(Extract, Transform, Load)** desenvolvido em Python para coletar dados meteorológicos da API OpenWeatherMap, processá-los e armazená-los em um banco de dados PostgreSQL.
 
-<img src='arquitetura_de_dados_draw.png' alt='Arquitetura do Pipeline ETL'>
-
 O objetivo é simular um fluxo real de engenharia de dados, aplicando boas práticas de organização, documentação, modularização e testes, com as melhores práticas de Engenharia de Dados)
+
 ---
 
-## ⚙️ Arquitetura do projeto
+## ⚙️ Orquestração e infraestrutura
 
+O pipeline ETL é orquestrado pelo **Apache Airflow**, enquanto a infraestrutura do ambiente é gerenciada via **Docker e Docker Compose**.
+![Arquitetura do Projeto](arquitetura_de_dados.png)
+
+## ⚙️ Arquitetura do projeto
 O pipeline é dividido em três etapas:
 
 - **Extract**: coleta os dados brutos de clima da API OpenWeather
 - **Transform**: realiza transformações tratando os dados brutos coletados
 - **Load**: armazena os dados processados no PostgreSQL
-
-## ⚙️ Orquestração e infraestrutura
-
-O pipeline ETL é orquestrado pelo **Apache Airflow**, enquanto a infraestrutura do ambiente é gerenciada via **Docker e Docker Compose**.
 
 ---
 
