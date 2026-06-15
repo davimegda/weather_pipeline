@@ -52,7 +52,7 @@ pipeline_weather/
 ├── main.py
 ├── pyproject.toml
 └── uv.lock
-
+```
 ## 🛠️Tecnologias Utilizadas:
 
 Core:
@@ -256,8 +256,8 @@ Converte colunas para datetime:
 columns_to_normalize = ['datetime', 'sunrise', 'sunset']
 
 # Converte para datetime do fuso horário de São Paulo
-df[col] = pd.to_datetime(df[col], unit='s', utc=True)
-         .dt.tz_convert('America/Sao_Paulo')
+    for name in columns_names:
+        df[name] = (pd.to_datetime(df[name], unit='s', utc=True).dt.tz_convert('America/Sao_Paulo'))
 ```
 #### **Remoção de colunas desnecessárias**
 - Cria-se uma função transform_weather_data que chama todas as funções de transformação criadas anteriormente. Essa função:
